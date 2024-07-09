@@ -27,7 +27,6 @@ class LivenessDetectionFlutterPlugin {
     BuildContext context, {
     required LivenessConfig config,
   }) async {
-    _safeAreaPadding = MediaQuery.of(context).padding;
     final String? capturedFacePath = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivenessDetectionScreen(

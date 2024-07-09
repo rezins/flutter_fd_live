@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                   config: LivenessConfig(
 
                     steps: stepLiveness,
-                    startWithInfoScreen: true,
+                    startWithInfoScreen: false,
                   ),
                 );
                 setState(() {

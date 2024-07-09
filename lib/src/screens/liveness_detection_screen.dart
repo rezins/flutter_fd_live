@@ -51,7 +51,6 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        minimum: const EdgeInsets.all(10),
         child: _buildBody(),
       ),
     );
