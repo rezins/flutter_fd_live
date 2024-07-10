@@ -20,32 +20,27 @@ class _HomePageState extends State<HomePage> {
   List<LivenessDetectionStepItem> stepLiveness = [
     LivenessDetectionStepItem(
       step: LivenessDetectionStep.blink,
-      title: "testing kedip",
+      title: "Kedip",
       isCompleted: false,
     ),
     LivenessDetectionStepItem(
       step: LivenessDetectionStep.lookUp,
-      title: "testing atas",
-      isCompleted: false,
-    ),
-    LivenessDetectionStepItem(
-      step: LivenessDetectionStep.lookDown,
-      title: "testing bawah",
+      title: "Wajah ke atas",
       isCompleted: false,
     ),
     LivenessDetectionStepItem(
       step: LivenessDetectionStep.turnRight,
-      title: "testing kanan",
+      title: "Wajah ke kanan",
       isCompleted: false,
     ),
     LivenessDetectionStepItem(
       step: LivenessDetectionStep.turnLeft,
-      title: "testing kiri",
+      title: "Wajah ke kiri",
       isCompleted: false,
     ),
     LivenessDetectionStepItem(
       step: LivenessDetectionStep.smile,
-      title: "testing senyum",
+      title: "Senyum",
       isCompleted: false,
     ),
   ];

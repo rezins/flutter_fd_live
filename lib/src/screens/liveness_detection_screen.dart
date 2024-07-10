@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:collection/collection.dart';
+import 'package:dim_loading_dialog/dim_loading_dialog.dart';
 import 'package:liveness_detection_flutter_plugin/index.dart';
 
 List<CameraDescription> availableCams = [];
@@ -26,6 +27,10 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
   bool _isProcessingStep = false;
   bool _didCloseEyes = false;
   bool _isTakingPicture = false;
+
+  late double scale;
+  late Size mediaSize;
+
   Timer? _timerToDetectFace;
 
   late final List<LivenessDetectionStepItem> _steps;
@@ -104,7 +109,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
 
   void _startFaceDetectionTimer() {
     // Create a Timer that runs for 45 seconds and calls _onDetectionCompleted after that.
-    _timerToDetectFace = Timer(const Duration(seconds: 45), () {
+    _timerToDetectFace = Timer(const Duration(minutes: 1, seconds: 30), () {
       _onDetectionCompleted(imgToReturn: null); // Pass null or "" as needed.
     });
   }
@@ -228,6 +233,16 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
   }
 
   void _takePicture() async {
+    DimLoadingDialog dimDialog = DimLoadingDialog(
+        context,
+        blur: 2,
+        backgroundColor: const Color(0x33000000),
+        animationDuration: const Duration(milliseconds: 500));
+
+    dimDialog.show(); // show dialog
+
+
+
     try {
       if (_cameraController == null) return;
       if (_isTakingPicture) {
@@ -238,12 +253,15 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
       );
       await _cameraController?.stopImageStream();
       final XFile? clickedImage = await _cameraController?.takePicture();
+      dimDialog.dismiss(); //close dialog
       if (clickedImage == null) {
         _startLiveFeed();
         return;
       }
       _onDetectionCompleted(imgToReturn: clickedImage);
+
     } catch (e) {
+      dimDialog.dismiss(); //close dialog
       _startLiveFeed();
     }
   }
@@ -396,24 +414,32 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
                   _startLiveFeed();
                 },
               ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              right: 10,
-              top: 10,
-            ),
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.black,
-              child: IconButton(
-                onPressed: () => _onDetectionCompleted(
-                  imgToReturn: null,
-                ),
-                icon: const Icon(
-                  Icons.close_rounded,
-                  size: 20,
+        Positioned(
+          top: 20,
+          left: 20,
+          child: Material(
+            borderRadius: BorderRadius.circular(10),
+            child: InkWell(
+              onTap: () => _onDetectionCompleted(
+                imgToReturn: null,
+              ),
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 2,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: const Center(
+                  child: Icon(Icons.clear, size: 40,),
                 ),
               ),
             ),
@@ -437,6 +463,12 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
     return Stack(
       fit: StackFit.expand,
       children: [
+        Transform.scale(
+          scale: 1,
+          alignment: Alignment.topCenter,
+          child: cameraView,
+        ),
+        /*
         Center(
           child: cameraView,
         ),
@@ -453,7 +485,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
         ),
         Center(
           child: cameraView,
-        ),
+        ),*/
         if (_customPaint != null) _customPaint!,
         LivenessDetectionStepOverlay(
           key: _stepsKey,

@@ -18,6 +18,10 @@ dependencies:
   equatable: ^2.0.5
   google_mlkit_face_detection: ^0.5.0
   image: ^4.0.15
+  google_fonts:
+  loading_animation_widget: ^1.2.1
+  flutter_stepindicator: ^0.1.7
+  dim_loading_dialog: ^0.0.3
 
 dev_dependencies:
   flutter_test:

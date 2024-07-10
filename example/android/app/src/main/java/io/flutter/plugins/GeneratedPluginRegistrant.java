@@ -21,6 +21,11 @@ public final class GeneratedPluginRegistrant {
       Log.e(TAG, "Error registering plugin camera_android, io.flutter.plugins.camera.CameraPlugin", e);
     }
     try {
+      flutterEngine.getPlugins().add(new com.mrhafid.dim_loading_dialog.DimLoadingDialogPlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin dim_loading_dialog, com.mrhafid.dim_loading_dialog.DimLoadingDialogPlugin", e);
+    }
+    try {
       flutterEngine.getPlugins().add(new io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin());
     } catch(Exception e) {
       Log.e(TAG, "Error registering plugin flutter_plugin_android_lifecycle, io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin", e);
@@ -39,6 +44,11 @@ public final class GeneratedPluginRegistrant {
       flutterEngine.getPlugins().add(new com.bagussubagja.liveness_detection_flutter_plugin.LivenessDetectionFlutterPlugin());
     } catch(Exception e) {
       Log.e(TAG, "Error registering plugin liveness_detection_flutter_plugin, com.bagussubagja.liveness_detection_flutter_plugin.LivenessDetectionFlutterPlugin", e);
+    }
+    try {
+      flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin path_provider_android, io.flutter.plugins.pathprovider.PathProviderPlugin", e);
     }
   }
 }
