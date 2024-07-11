@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:collection/collection.dart';
 import 'package:dim_loading_dialog/dim_loading_dialog.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:liveness_detection_flutter_plugin/index.dart';
 
 List<CameraDescription> availableCams = [];
@@ -236,30 +237,64 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
     DimLoadingDialog dimDialog = DimLoadingDialog(
         context,
         blur: 2,
+        loadingWidget: Container(
+          height: 200,
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                height: 100.0,
+                width: 100.0,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                ),
+                child: const CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              ),
+              const SizedBox(height: 10,),
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                height: 50.0,
+                width: 200,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                ),
+                child: Text("Mata ke kamera", style: GoogleFonts.workSans(color: Colors.black, fontSize: 18),)
+              ),
+            ],
+          ),
+        ),
         backgroundColor: const Color(0x33000000),
         animationDuration: const Duration(milliseconds: 500));
-
-    dimDialog.show(); // show dialog
 
 
 
     try {
-      if (_cameraController == null) return;
+      if (_cameraController == null) {
+        return;
+      }
       if (_isTakingPicture) {
         return;
       }
       setState(
         () => _isTakingPicture = true,
       );
+      dimDialog.show(); // show dialog
       await _cameraController?.stopImageStream();
       final XFile? clickedImage = await _cameraController?.takePicture();
-      dimDialog.dismiss(); //close dialog
+
       if (clickedImage == null) {
+        dimDialog.dismiss(); //close dialog
         _startLiveFeed();
         return;
       }
       _onDetectionCompleted(imgToReturn: clickedImage);
-
+      dimDialog.dismiss(); //close dialog
     } catch (e) {
       dimDialog.dismiss(); //close dialog
       _startLiveFeed();

@@ -97,7 +97,7 @@ class LivenessDetectionStepOverlayState extends State<LivenessDetectionStepOverl
       });
 
       await Future.delayed(
-        const Duration(milliseconds: 350),
+        const Duration(milliseconds: 250),
       );
       widget.onCompleted();
     }
