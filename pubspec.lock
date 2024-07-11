@@ -121,14 +121,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
-  dim_loading_dialog:
+  dashed_circular_progress_bar:
     dependency: "direct main"
     description:
-      name: dim_loading_dialog
-      sha256: "62e0179882a9b9b15028c68ac4b33dc830a9790375fbf9b72d365a0a59a30d40"
+      name: dashed_circular_progress_bar
+      sha256: "067bd0a11ff04c70ba68589f8a248565971b478423721a2b70a6b476e27a77f0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   equatable:
     dependency: "direct main"
     description:
@@ -384,6 +384,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  simple_loading_dialog:
+    dependency: "direct main"
+    description:
+      name: simple_loading_dialog
+      sha256: "18963d3ee0e6d7971963639e9f922457d0119852f126fabab10729a500af14d9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
   sky_engine:
     dependency: transitive
     description: flutter

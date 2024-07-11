@@ -12,12 +12,6 @@
 @import camera_avfoundation;
 #endif
 
-#if __has_include(<dim_loading_dialog/DimLoadingDialogPlugin.h>)
-#import <dim_loading_dialog/DimLoadingDialogPlugin.h>
-#else
-@import dim_loading_dialog;
-#endif
-
 #if __has_include(<google_mlkit_commons/GoogleMlKitCommonsPlugin.h>)
 #import <google_mlkit_commons/GoogleMlKitCommonsPlugin.h>
 #else
@@ -46,7 +40,6 @@
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
   [CameraPlugin registerWithRegistrar:[registry registrarForPlugin:@"CameraPlugin"]];
-  [DimLoadingDialogPlugin registerWithRegistrar:[registry registrarForPlugin:@"DimLoadingDialogPlugin"]];
   [GoogleMlKitCommonsPlugin registerWithRegistrar:[registry registrarForPlugin:@"GoogleMlKitCommonsPlugin"]];
   [GoogleMlKitFaceDetectionPlugin registerWithRegistrar:[registry registrarForPlugin:@"GoogleMlKitFaceDetectionPlugin"]];
   [LivenessDetectionFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"LivenessDetectionFlutterPlugin"]];

@@ -27,6 +27,7 @@ class LivenessDetectionFlutterPlugin {
     BuildContext context, {
     required LivenessConfig config,
   }) async {
+    print("testing");
     final String? capturedFacePath = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivenessDetectionScreen(
@@ -34,6 +35,7 @@ class LivenessDetectionFlutterPlugin {
         ),
       ),
     );
+    print("==================>$capturedFacePath");
     return capturedFacePath;
   }
 
