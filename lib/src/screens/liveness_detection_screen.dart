@@ -289,12 +289,12 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
       final XFile? clickedImage = await _cameraController?.takePicture();
 
       if (clickedImage == null) {
-        print("path null");
+        print("=>>path null");
         dimDialog.dismiss(); //close dialog
         _startLiveFeed();
         return;
       }
-      print(clickedImage.path);
+      print("==>>${clickedImage.path}");
       _onDetectionCompleted(imgToReturn: clickedImage);
       dimDialog.dismiss(); //close dialog
     } catch (e) {
@@ -307,7 +307,8 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
     XFile? imgToReturn,
   }) {
     final String? imgPath = imgToReturn?.path;
-    Navigator.of(context).pop(imgPath);
+    print("===>>${imgPath}");
+    Navigator.pop(context, imgPath);
   }
 
   void _resetSteps() async {
