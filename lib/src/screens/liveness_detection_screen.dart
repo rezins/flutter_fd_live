@@ -289,10 +289,12 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
       final XFile? clickedImage = await _cameraController?.takePicture();
 
       if (clickedImage == null) {
+        print("path null");
         dimDialog.dismiss(); //close dialog
         _startLiveFeed();
         return;
       }
+      print(clickedImage.path);
       _onDetectionCompleted(imgToReturn: clickedImage);
       dimDialog.dismiss(); //close dialog
     } catch (e) {
