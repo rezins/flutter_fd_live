@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:liveness_detection_flutter_plugin/index.dart';
+import 'package:loading_progress/loading_progress.dart';
 
 List<CameraDescription> availableCams = [];
 
@@ -25,6 +26,8 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
   bool _isProcessingStep = false;
   bool _didCloseEyes = false;
   bool _isTakingPicture = false;
+
+  bool _notifTakingPicture = false;
 
   late double scale;
   late Size mediaSize;
@@ -233,6 +236,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
   void _takePicture() async {
 
     try {
+      LoadingProgress.start(context);
       if (_cameraController == null) {
         return;
       }
@@ -242,9 +246,10 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
       setState(
         () => _isTakingPicture = true,
       );
+
       await _cameraController?.stopImageStream();
       final XFile? clickedImage = await _cameraController?.takePicture();
-
+      LoadingProgress.stop(context);
       if (clickedImage == null) {
         _onDetectionCompleted(imgToReturn: null);
         return;
@@ -475,7 +480,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
         Center(
           child: cameraView,
         ),*/
-        if (_customPaint != null) _customPaint!,
+        if (_customPaint != null && !_notifTakingPicture) _customPaint!,
         LivenessDetectionStepOverlay(
           key: _stepsKey,
           steps: _steps,
@@ -483,6 +488,12 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
             const Duration(milliseconds: 500),
             () => _takePicture(),
           ),
+          onTakingPicture: () {
+            _notifTakingPicture = true;
+            setState(() {
+
+            });
+          }
         ),
       ],
     );

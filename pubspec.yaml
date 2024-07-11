@@ -22,7 +22,8 @@ dependencies:
   loading_animation_widget: ^1.2.1
   flutter_stepindicator: ^0.1.7
   dashed_circular_progress_bar: ^0.0.4
-  simple_loading_dialog: ^0.5.0
+  loading_progress: ^1.0.2
+
 
 dev_dependencies:
   flutter_test:

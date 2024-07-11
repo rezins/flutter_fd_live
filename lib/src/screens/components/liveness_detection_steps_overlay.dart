@@ -9,7 +9,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 class LivenessDetectionStepOverlay extends StatefulWidget {
   final List<LivenessDetectionStepItem> steps;
   final VoidCallback onCompleted;
-  const LivenessDetectionStepOverlay({super.key, required this.steps, required this.onCompleted});
+  final VoidCallback onTakingPicture;
+  const LivenessDetectionStepOverlay({super.key, required this.steps, required this.onCompleted, required this.onTakingPicture});
 
   @override
   State<LivenessDetectionStepOverlay> createState() => LivenessDetectionStepOverlayState();
@@ -106,6 +107,8 @@ class LivenessDetectionStepOverlayState extends State<LivenessDetectionStepOverl
       await Future.delayed(
         const Duration(milliseconds: 250),
       );
+
+      widget.onTakingPicture();
 
       setState(() {
         _progressBar = true;
