@@ -331,6 +331,21 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
         }
         break;
       case LivenessDetectionStep.turnRight:
+
+        if(Platform.isIOS){
+          final LivenessThresholdHead? headTurnThreshold =
+          LivenessDetectionFlutterPlugin.instance.thresholdConfig
+              .firstWhereOrNull(
+                (p0) => p0 is LivenessThresholdHead,
+          ) as LivenessThresholdHead?;
+          if ((face.headEulerAngleY ?? 0) >
+              (headTurnThreshold?.rotationAngle ?? 30)) {
+            _startProcessing();
+            await _completeStep(step: step);
+          }
+          break;
+        }
+
         final LivenessThresholdHead? headTurnThreshold =
             LivenessDetectionFlutterPlugin.instance.thresholdConfig
                 .firstWhereOrNull(
@@ -343,6 +358,21 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
         }
         break;
       case LivenessDetectionStep.turnLeft:
+
+        if(Platform.isIOS){
+          final LivenessThresholdHead? headTurnThreshold =
+          LivenessDetectionFlutterPlugin.instance.thresholdConfig
+              .firstWhereOrNull(
+                (p0) => p0 is LivenessThresholdHead,
+          ) as LivenessThresholdHead?;
+          if ((face.headEulerAngleY ?? 0) <
+              (headTurnThreshold?.rotationAngle ?? -30)) {
+            _startProcessing();
+            await _completeStep(step: step);
+          }
+          break;
+        }
+
         final LivenessThresholdHead? headTurnThreshold =
             LivenessDetectionFlutterPlugin.instance.thresholdConfig
                 .firstWhereOrNull(
