@@ -114,7 +114,7 @@ class LivenessDetectionStepOverlayState extends State<LivenessDetectionStepOverl
         _progressBar = true;
       });
 
-      for (int i = 0; i <= 115; i++) {
+      for (int i = 0; i <= 110; i++) {
         progress = i.toDouble();
         setState(() {
 
