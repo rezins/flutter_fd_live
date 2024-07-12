@@ -147,6 +147,59 @@ class LivenessDetectionStepOverlayState extends State<LivenessDetectionStepOverl
         () => _isLoading = false,
       );
 
+  Widget _centerWidgetInRow(Widget wi, double width){
+    return Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: Container(),
+        ),
+        SizedBox(width: width,
+          child: Center(child: wi),
+        ),
+        Expanded(
+          flex: 1,
+          child: Container(),
+        )
+      ],
+    );
+  }
+
+  Widget step(){
+
+    var stepWidget = FlutterStepIndicator(
+      height: 28,
+      paddingLine: const EdgeInsets.symmetric(horizontal: 0),
+      positiveColor: const Color.fromARGB(255, 0, 112, 224),
+      progressColor: const Color(0xFFEA9C00),
+      negativeColor: const Color(0xFFD5D5D5),
+      padding: const EdgeInsets.all(4),
+      list: list,division: counter,
+      onChange: (i) {},
+      page: page,
+      onClickItem: (p0) {
+
+      },
+    );
+
+    var width = 30;
+    var length = widget.steps.length;
+    switch(length){
+      case 1 :
+        return _centerWidgetInRow(stepWidget, (width * length).toDouble());
+      case 2 :
+        return _centerWidgetInRow(stepWidget, (width + (width * (length * 2))).toDouble());
+      case 3 :
+        return _centerWidgetInRow(stepWidget, (width + (width * (length * 3))).toDouble());
+      case 4 :
+        return _centerWidgetInRow(stepWidget, (width + (width * (length * 2.5))).toDouble());
+      case 5 :
+        return stepWidget;
+      default:
+        return Container();
+    }
+  }
+
   //* MARK: - Private Methods for UI Components
   //? =========================================================
   Widget _buildBody() {
@@ -218,22 +271,10 @@ class LivenessDetectionStepOverlayState extends State<LivenessDetectionStepOverl
           ),
           const SizedBox(height: 10,),
           SizedBox(height: 40,
-            child: Padding(
+            child: Container(
+              alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 7),
-              child: FlutterStepIndicator(
-                height: 28,
-                paddingLine: const EdgeInsets.symmetric(horizontal: 0),
-                positiveColor: const Color.fromARGB(255, 0, 112, 224),
-                progressColor: const Color(0xFFEA9C00),
-                negativeColor: const Color(0xFFD5D5D5),
-                padding: const EdgeInsets.all(4),
-                list: list,division: counter,
-                onChange: (i) {},
-                page: page,
-                onClickItem: (p0) {
-
-                },
-              ),
+              child: step(),
             ),
           ),
           const SizedBox(height: 30,)
