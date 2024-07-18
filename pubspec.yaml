@@ -5,19 +5,18 @@ homepage: "https://bagussubagja.vercel.app"
 repository: "https://github.com/bagussubagja/liveness-detection-flutter-plugin"
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
-  flutter: ">=2.5.0"
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
   animate_do: ^3.0.2
-  camera: ^0.10.1
+  camera: 0.11.0+1
   collection: ^1.16.0
   equatable: ^2.0.5
-  google_mlkit_face_detection: ^0.5.0
-  image: ^4.0.15
+  google_mlkit_face_detection: 0.5.0
+  image: 4.2.0
   google_fonts:
   loading_animation_widget: ^1.2.1
   flutter_stepindicator: ^0.1.7
